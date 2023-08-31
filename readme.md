@@ -47,6 +47,11 @@ Install packages
 npm install
 ```
 
+Install Angular CLI:
+```
+npm install -g @angular/cli
+```
+
 Run the app:
 ```
 ng serve -o
