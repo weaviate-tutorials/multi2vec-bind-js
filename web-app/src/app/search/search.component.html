@@ -1,0 +1,80 @@
+<div class="text-search">
+  <input type="text" [(ngModel)]="query" (keyup)="onKeydown($event)">
+  <button (click)="textSearch()">Text Search</button>
+</div>
+
+<div class="media-search">
+  <div>
+    <button class="card" (click)="imageFileInput.click()">Image Search</button>
+    <input hidden #imageFileInput
+      type="file" accept="image/*"
+      (change)="imageSearch($event)">
+  </div>
+
+  <div>
+    <button class="card" (click)="audioFileInput.click()">Audio Search</button>
+    <input hidden #audioFileInput 
+      type="file" accept="audio/wav,audio/mp3"
+      (change)="audioSearch($event)">
+  </div>
+
+  <div>
+    <button class="card" (click)="videoFileInput.click()">Video Search</button>
+    <input hidden #videoFileInput 
+      type="file" accept="video/*"
+      (change)="videoSearch($event)">
+  </div>
+</div>
+
+<div *ngIf="queryType != 'text'" class="display-query">
+  <hr>
+
+  <h3>Input Query </h3>
+  <!-- <div *ngIf="queryType === 'text'" class="text-container">
+    <span>{{query}}</span>
+  </div> -->
+
+  <div *ngIf="queryType === 'image'" class="image-container">
+    <img [src]="fileSrc" height="400">
+  </div>
+
+  <div *ngIf="queryType === 'audio'" class="audio-container">
+    <audio controls [src]="fileSrc">
+      <a [href]="fileSrc"> Download audio </a>
+    </audio>
+  </div>
+
+  <div *ngIf="queryType === 'video'" class="video-container">
+    <video controls>
+      <!-- <source [src]="item.url" type="video/mp4"> -->
+      <source [src]="fileSrc">
+      Your browser does not support the video tag.
+    </video>
+  </div>
+  <hr>
+</div>
+
+<div class="results-container">
+  <div *ngIf="queryInProgress" class="loader"></div>
+
+  <div *ngFor="let item of result" class="media-container">
+    <h3>{{item.name}}</h3>
+    <div *ngIf="item.media === 'image'" class="image-container">
+      <img [src]="item.url" height="400">
+    </div>
+
+    <div *ngIf="item.media === 'audio'" class="audio-container">
+      <audio controls [src]="item.url">
+        <a [href]="item.url"> Download audio </a>
+      </audio>
+    </div>
+
+    <div *ngIf="item.media === 'video'" class="video-container">
+      <video controls>
+        <!-- <source [src]="item.url" type="video/mp4"> -->
+        <source [src]="item.url">
+        Your browser does not support the video tag.
+      </video>
+    </div>
+  </div>
+</div>
