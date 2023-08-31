@@ -13,6 +13,41 @@ docker compose up
 docker compose down
 ```
 
-## Setting up Weaviate with Node
+## Setting up data in Weaviate with Node
 
-Run 
+Go to the node folder:
+
+```
+cd node-app
+```
+
+Install packages
+
+```
+npm install
+```
+
+Run data import (this needs to run only once)
+
+```
+npm run start
+```
+
+## Run Web App
+
+Go to the web project
+
+```
+cd wep-app
+```
+
+Install packages
+
+```
+npm install
+```
+
+Run the app:
+```
+ng serve -o
+```
