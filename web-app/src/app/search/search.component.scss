@@ -170,6 +170,7 @@ button:hover {
     margin: 0;
     line-height: 50px;
     text-align: center;
+    white-space: nowrap;
     -moz-transform: translateX(100%);
     -webkit-transform: translateX(100%);
     transform: translateX(100%);
