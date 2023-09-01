@@ -23,11 +23,17 @@ h3 {
     width: 600px;
     transition: all 0.5s ease-out;
   }
-  input:focus,
+
+  input:focus-visible {
+    outline: 1px solid black;
+  }
+  /*  input:focus,
   :hover {
     background: #423a69;
     color: white;
-  }
+    border: 1px solid black;
+    box-shadow: -4px 3px black;
+  } */
 }
 .media-search {
   width: 541px;
@@ -80,9 +86,20 @@ h3 {
   padding: 10px;
   background: white;
   box-shadow: 0 0 10px 10px #c3ccb7ab;
+  transition: all 0.5s ease-out;
 
   h3 {
     color: rgb(0, 0, 0);
+  }
+}
+
+.media-container:hover {
+  background: #423a69;
+  color: white;
+  box-shadow: -7px 9px black;
+
+  h3 {
+    color: white;
   }
 }
 
@@ -162,6 +179,7 @@ button {
 button:hover {
   background: #423a69;
   color: white;
+  box-shadow: -4px 3px black;
 }
 
 .scrollText {
