@@ -28,7 +28,8 @@ export class SearchComponent {
   public queryType: string = 'text';
   public queryInProgress: boolean = false;
 
-  constructor(private weaviate:WeaviateService) {}
+  constructor(private weaviate:WeaviateService ) {}
+  
 
   onKeydown(event: any) {
     if (event.key === "Enter")
@@ -43,6 +44,7 @@ export class SearchComponent {
     this.result = await this.weaviate.textSearch(this.query);
     this.queryInProgress = false;
     // console.log(JSON.stringify(this.result, null, 2));
+   
   }
 
   async imageSearch($event: any) {    
@@ -53,6 +55,14 @@ export class SearchComponent {
     this.result = [];
     this.result = await this.weaviate.imageSearch(file);
     this.queryInProgress = false;
+   
+    
+     const lastElement = document.querySelector("#scrollDown"); 
+     
+     if (lastElement) {
+       lastElement.scrollIntoView({ behavior: "smooth", block: "end" });
+       
+     }
   }
 
   async audioSearch($event: any) {
@@ -63,6 +73,10 @@ export class SearchComponent {
     this.result = [];
     this.result = await this.weaviate.audioSearch(file);
     this.queryInProgress = false;
+    const lastElement = document.querySelector("#scrollDown"); 
+    if (lastElement) {
+      lastElement.scrollIntoView({ behavior: "smooth", block: "end" });
+    }
   }
 
   async videoSearch($event: any) {
@@ -73,6 +87,10 @@ export class SearchComponent {
     this.result = [];
     this.result = await this.weaviate.videoSearch(file);
     this.queryInProgress = false;
+    const lastElement = document.querySelector("#scrollDown"); 
+    if (lastElement) {
+      lastElement.scrollIntoView({ behavior: "smooth", block: "end" });
+    }
   }
 
   displayMedia (file: File, media: string) {

@@ -54,7 +54,7 @@ h3 {
   align-items: first baseline;
   margin-top: 40px;
 
-  @media only screen and (max-width: 600px) {
+  @media only screen and (max-width: 800px) {
     align-items: center;
     flex-direction: column;
     align-content: flex-start;
@@ -69,6 +69,7 @@ h3 {
   border-radius: 9px;
   padding: 10px;
   background: white;
+  box-shadow: 0 0 10px 10px #c3ccb7ab;
 }
 
 .media-container {
@@ -78,6 +79,7 @@ h3 {
   border-radius: 9px;
   padding: 10px;
   background: white;
+  box-shadow: 0 0 10px 10px #c3ccb7ab;
 
   h3 {
     color: rgb(0, 0, 0);
@@ -145,8 +147,7 @@ h3 {
 .search-input {
   border: 1px solid;
   border-radius: 7px;
-
-  height: 27px;
+  height: 44px;
 }
 
 button {
@@ -156,7 +157,7 @@ button {
   background: white;
   color: #000;
   transition: all 0.5s ease-out;
-  height: 30px;
+  height: 47px;
 }
 button:hover {
   background: #423a69;
@@ -246,4 +247,12 @@ button:hover {
   height: 4.5rem;
   width: 125px;
   margin: 0px 20px;
+}
+
+#scrollDown {
+  opacity: 0;
+  position: relative;
+  margin: auto;
+  width: 10%;
+  bottom: -100px;
 }
