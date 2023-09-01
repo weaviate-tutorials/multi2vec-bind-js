@@ -27,13 +27,6 @@ h3 {
   input:focus-visible {
     outline: 1px solid black;
   }
-  /*  input:focus,
-  :hover {
-    background: #423a69;
-    color: white;
-    border: 1px solid black;
-    box-shadow: -4px 3px black;
-  } */
 }
 .media-search {
   width: 541px;
@@ -212,7 +205,7 @@ button:hover {
     -moz-transform: translateX(100%);
   }
   100% {
-    -moz-transform: translateX(-2900px);
+    -moz-transform: translateX(-3200px);
   }
 }
 @-webkit-keyframes scroll-left {
@@ -220,7 +213,7 @@ button:hover {
     -webkit-transform: translateX(100%);
   }
   100% {
-    -webkit-transform: translateX(-2900px);
+    -webkit-transform: translateX(-3200px);
   }
 }
 @keyframes scroll-left {
@@ -230,9 +223,9 @@ button:hover {
     transform: translateX(100%);
   }
   100% {
-    -moz-transform: translateX(-2900px); /* Browser bug fix */
-    -webkit-transform: translateX(-2900px); /* Browser bug fix */
-    transform: translateX(-2900px);
+    -moz-transform: translateX(-3200px); /* Browser bug fix */
+    -webkit-transform: translateX(-3200px); /* Browser bug fix */
+    transform: translateX(-3200px);
   }
 }
 
@@ -273,4 +266,16 @@ button:hover {
   margin: auto;
   width: 10%;
   bottom: -100px;
+}
+
+.whr {
+  color: white;
+  background: white;
+  height: 2px;
+  width: 50%;
+  border: 1px solid black;
+  border-radius: 4px;
+  margin-top: 40px;
+  transition: all 0.5s ease-out;
+  opacity: 0;
 }

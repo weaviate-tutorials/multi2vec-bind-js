@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, Renderer2} from '@angular/core';
 import { Item, WeaviateService } from '../weaviate.service';
 
 enum SearchState {
@@ -28,7 +28,7 @@ export class SearchComponent {
   public queryType: string = 'text';
   public queryInProgress: boolean = false;
 
-  constructor(private weaviate:WeaviateService ) {}
+  constructor(private weaviate:WeaviateService,private renderer: Renderer2 ) {}
   
 
   onKeydown(event: any) {
@@ -45,6 +45,11 @@ export class SearchComponent {
     this.queryInProgress = false;
     // console.log(JSON.stringify(this.result, null, 2));
    
+    const hrEl = document.querySelector("#whiteBar"); 
+    if (hrEl) {
+      this.renderer.setStyle(hrEl, 'width', '100%');
+      this.renderer.setStyle(hrEl, 'opacity', '1');
+    }
   }
 
   async imageSearch($event: any) {    
@@ -63,6 +68,11 @@ export class SearchComponent {
        lastElement.scrollIntoView({ behavior: "smooth", block: "end" });
        
      }
+     const hrEl = document.querySelector("#whiteBar"); 
+     if (hrEl) {
+       this.renderer.setStyle(hrEl, 'width', '50%');
+       this.renderer.setStyle(hrEl, 'opacity', '1');
+     }
   }
 
   async audioSearch($event: any) {
@@ -77,6 +87,11 @@ export class SearchComponent {
     if (lastElement) {
       lastElement.scrollIntoView({ behavior: "smooth", block: "end" });
     }
+    const hrEl = document.querySelector("#whiteBar"); 
+    if (hrEl) {
+      this.renderer.setStyle(hrEl, 'width', '50%');
+      this.renderer.setStyle(hrEl, 'opacity', '1');
+    }
   }
 
   async videoSearch($event: any) {
@@ -90,6 +105,11 @@ export class SearchComponent {
     const lastElement = document.querySelector("#scrollDown"); 
     if (lastElement) {
       lastElement.scrollIntoView({ behavior: "smooth", block: "end" });
+    }
+    const hrEl = document.querySelector("#whiteBar"); 
+    if (hrEl) {
+      this.renderer.setStyle(hrEl, 'width', '50%');
+      this.renderer.setStyle(hrEl, 'opacity', '1');
     }
   }
 
