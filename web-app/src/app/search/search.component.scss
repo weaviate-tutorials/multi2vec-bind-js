@@ -73,7 +73,7 @@ h3 {
 
 .media-container {
   width: 320px;
-  height: 243px;
+  height: 100%;
   border: 1px solid black;
   border-radius: 9px;
   padding: 10px;
@@ -99,7 +99,7 @@ h3 {
 .image-container {
   img {
     width: 100%;
-    max-height: 181px;
+    max-height: 300px;
   }
 }
 
@@ -265,7 +265,7 @@ button:hover {
   position: relative;
   margin: auto;
   width: 10%;
-  bottom: -100px;
+  bottom: -300px;
 }
 
 .whr {
