@@ -1,5 +1,9 @@
 ---
 version: '3.4'
+
+volumes:
+  weaviate_data: {}
+
 services:
   weaviate:
     command:
@@ -13,6 +17,8 @@ services:
     ports:
     - 8080:8080
     restart: on-failure:0
+    volumes:
+      - weaviate_data:/var/lib/weaviate
     environment:
       QUERY_DEFAULTS_LIMIT: 25
       AUTHENTICATION_ANONYMOUS_ACCESS_ENABLED: 'true'
@@ -21,8 +27,47 @@ services:
       ENABLE_MODULES: 'multi2vec-bind'
       BIND_INFERENCE_API: 'http://multi2vec-bind:8080'
       CLUSTER_HOSTNAME: 'node1'
+      BACKUP_FILESYSTEM_PATH: '/mnt/blockstorage'
+    depends_on:
+      multi2vec-bind:
+        condition: service_healthy
+    healthcheck:
+      test: wget --no-verbose --tries=3 --spider http://localhost:8080/v1/.well-known/ready || exit 1
+      interval: 5s
+      timeout: 30s
+      retries: 5
+      start_period: 10s
   multi2vec-bind:
-    image: semitechnologies/multi2vec-bind:imagebind
+    #image: semitechnologies/multi2vec-bind:imagebind
+    image: multi2vec-bind:imagebind
     environment:
       ENABLE_CUDA: '0'
+    healthcheck:
+      test: wget --no-verbose --tries=3 --spider http://localhost:8080/.well-known/ready || exit 1
+      interval: 20s
+      retries: 5
+      start_period: 15s
+      timeout: 10s
+    ports:
+      - 8081:8080
+  web-app:
+    build:
+      context: ./web-app
+    ports:
+      - 4200:80
+      - 80:80
+    environment:
+      - WEAVIATE_HOST="weaviate:8080"
+    healthcheck:
+      test: curl --fail http://localhost:80 || exit 1
+      interval: 20s
+      retries: 5
+      start_period: 10s
+      timeout: 10s
+  node-app:
+    build:
+      context: ./node-app
+    depends_on:
+      weaviate:
+        condition: service_healthy
 ...
