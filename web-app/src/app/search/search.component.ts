@@ -50,6 +50,8 @@ export class SearchComponent {
       this.renderer.setStyle(hrEl, 'width', '100%');
       this.renderer.setStyle(hrEl, 'opacity', '1');
     }
+
+    
   }
 
   async imageSearch($event: any) {    

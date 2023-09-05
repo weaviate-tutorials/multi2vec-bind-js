@@ -218,13 +218,13 @@ button:hover {
 }
 @keyframes scroll-left {
   0% {
-    -moz-transform: translateX(100%); /* Browser bug fix */
-    -webkit-transform: translateX(100%); /* Browser bug fix */
+    -moz-transform: translateX(100%);
+    -webkit-transform: translateX(100%);
     transform: translateX(100%);
   }
   100% {
-    -moz-transform: translateX(-3200px); /* Browser bug fix */
-    -webkit-transform: translateX(-3200px); /* Browser bug fix */
+    -moz-transform: translateX(-3200px);
+    -webkit-transform: translateX(-3200px);
     transform: translateX(-3200px);
   }
 }
@@ -265,7 +265,7 @@ button:hover {
   position: relative;
   margin: auto;
   width: 10%;
-  bottom: -300px;
+  bottom: -250px;
 }
 
 .whr {
