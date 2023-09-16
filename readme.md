@@ -54,7 +54,7 @@ In this step, we will run an Angular app, which allows us to search through our 
 1. Go to the web project
 
 ```
-cd wep-app
+cd web-app
 ```
 
 2. Install packages
