@@ -1,5 +1,21 @@
+
+<div class = "navbar">
+  <div class = "innerNav">
+<img class ="navImage" src ="/assets/weaviate-nav-logo.svg">
+<div class = "scrollText">
+  <p>This project aims to leverage AI-powered techniques for efficient vector database search. By employing advanced algorithms and machine learning models, the project seeks to enhance the speed and accuracy of searching within large-scale vector databases. This technology has the potential to revolutionize information retrieval in various fields, from image and audio recognition to recommendation systems and genomic analysis.</p>
+  <div class ="shadow"></div>
+</div>
+  </div>
+</div>
+<div class="container">
+  <div class = "header">
+
+    <h1>Weaviate Semantic Search</h1>
+    
+  </div>
 <div class="text-search">
-  <input type="text" [(ngModel)]="query" (keyup)="onKeydown($event)">
+  <input class = "search-input" type="text" [(ngModel)]="query" (keyup)="onKeydown($event)">
   <button (click)="textSearch()">Text Search</button>
 </div>
 
@@ -27,7 +43,7 @@
 </div>
 
 <div *ngIf="queryType != 'text'" class="display-query">
-  <hr>
+  
 
   <h3>Input Query </h3>
   <!-- <div *ngIf="queryType === 'text'" class="text-container">
@@ -51,9 +67,9 @@
       Your browser does not support the video tag.
     </video>
   </div>
-  <hr>
+  
 </div>
-
+<hr class="whr" id="whiteBar">
 <div class="results-container">
   <div *ngIf="queryInProgress" class="loader"></div>
 
@@ -77,4 +93,9 @@
       </video>
     </div>
   </div>
+</div>
+
+</div>
+<div id ="scrollDown">
+  <a href="#bottom">Go To bottom</a>
 </div>
