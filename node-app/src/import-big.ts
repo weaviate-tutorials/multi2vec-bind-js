@@ -8,6 +8,7 @@ const sourceBase = '../web-app/src/';
 
 export const importBigSet = async (collectionName: string) => {
     await insertImages(collectionName, 'assets/bigset/image/0/');
+    await insertImages(collectionName, 'assets/bigset/image/1/');
 }
 
 const insertImages = async (collectionName: string, imagePath: string) => {
