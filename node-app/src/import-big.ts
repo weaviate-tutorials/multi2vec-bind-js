@@ -5,15 +5,12 @@ import { getBase64, listFiles } from './util';
 const client: WeaviateClient = getWeaviateClient();
 
 const sourceBase = '../web-app/src/';
-// const imagePath = `assets/bigset/image/0/`
-// const imagePath = `assets/bigset/image/1/`
-const imagePath = `assets/bigset/image/2/`
 
 export const importBigSet = async (collectionName: string) => {
-    await insertImages(collectionName);
+    await insertImages(collectionName, 'assets/bigset/image/0/');
 }
 
-const insertImages = async (collectionName: string) => {
+const insertImages = async (collectionName: string, imagePath: string) => {
     let batcher: ObjectsBatcher = client.batch.objectsBatcher();
     let counter = 0;
     let batchCounter = 0;
