@@ -3,10 +3,11 @@ import weaviate, { WeaviateClient } from 'weaviate-ts-client';
 let client: WeaviateClient;
 
 export const getWeaviateClient = () => {
+  
   if (!client) {
     client = weaviate.client({
       scheme: 'http',
-      host: 'localhost:8080',
+      host: process.env.WEAVIATE_HOST || 'localhost:8080',
     });
   };
   

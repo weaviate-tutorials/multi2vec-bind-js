@@ -7,7 +7,7 @@ import { FileInfo, getBase64, listFiles } from './util';
 // const sourceImages = 'source/input_images/';
 // const sourceAudio = 'source/audio/';
 // const sourceVideo = 'source/video/';
-const sourceBase = '../web-app/src/assets';
+const sourceBase = '/app/source';
 const sourceImages = sourceBase + '/image/'
 const sourceAudio = sourceBase + '/audio/';
 const sourceVideo = sourceBase + '/video/';
