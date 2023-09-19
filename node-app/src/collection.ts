@@ -34,6 +34,13 @@ export const createBindCollection = async (name: string) => {
         },
       },
       {
+        name: 'url',
+        dataType: ['text'],
+        moduleConfig: {
+          'multi2vec-bind': { skip: true },
+        },
+      },
+      {
         name: 'media',
         dataType: ['text'],
         moduleConfig: {

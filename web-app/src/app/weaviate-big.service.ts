@@ -1,18 +1,12 @@
 import { Injectable } from '@angular/core';
 import weaviate, { WeaviateClient } from 'weaviate-ts-client';
 import { Base64Service } from './base64.service';
-
-export interface Item {
-  name: string;
-  url: string;
-  media: string;
-  certainty: number;
-}
+import { Item } from './weaviate.service';
 
 @Injectable({
   providedIn: 'root'
 })
-export class WeaviateService {
+export class WeaviateBigService {
   private client: WeaviateClient;
 
   constructor(private base64: Base64Service) {
@@ -25,10 +19,10 @@ export class WeaviateService {
   async textSearch(query: string): Promise<Item[]> {
     const response = await this.client.graphql
     .get()
-    .withClassName('BindExample')
-    .withFields('name, media, url, _additional {certainty} ')
+    .withClassName('BigSet')
+    .withFields('name media, url, _additional {certainty} ')
     .withNearText({concepts: [query]})
-    .withLimit(4)
+    .withLimit(12)
     .do();
 
     return this.parseResponse(response);
@@ -39,10 +33,10 @@ export class WeaviateService {
 
     const response = await this.client.graphql
       .get()
-      .withClassName('BindExample')
+      .withClassName('BigSet')
       .withFields('name, media, url, _additional {certainty} ')
       .withNearImage({image: base64})
-      .withLimit(4)
+      .withLimit(12)
       .do()
       
     return this.parseResponse(response);
@@ -53,10 +47,10 @@ export class WeaviateService {
 
     const response = await this.client.graphql
       .get()
-      .withClassName('BindExample')
+      .withClassName('BigSet')
       .withFields('name, media, url, _additional {certainty} ')
       .withNearAudio({audio: base64})
-      .withLimit(4)
+      .withLimit(12)
       .do()
 
     return this.parseResponse(response);
@@ -67,17 +61,17 @@ export class WeaviateService {
 
     const response = await this.client.graphql
       .get()
-      .withClassName('BindExample')
+      .withClassName('BigSet')
       .withFields('name, media, url, _additional {certainty} ')
       .withNearVideo({video: base64})
-      .withLimit(4)
+      .withLimit(12)
       .do()
 
     return this.parseResponse(response);
   }
 
   private parseResponse(response: any): Promise<Item[]> {
-    return response.data.Get.BindExample.map((item: any) => {
+    return response.data.Get.BigSet.map((item: any) => {
       return {
         name: item.name,
         url: item.url,

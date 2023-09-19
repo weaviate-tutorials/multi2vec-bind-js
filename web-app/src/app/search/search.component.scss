@@ -47,8 +47,15 @@ h3 {
   }
 }
 
+.big-search {
+  display: flex;
+  justify-content: center;
+  margin-top: 10px;
+}
+
 .results-container {
   display: flex;
+  flex-wrap: wrap;
   gap: 20px;
   align-items: first baseline;
   margin-top: 40px;

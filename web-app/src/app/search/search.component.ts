@@ -1,19 +1,6 @@
 import { Component, Renderer2} from '@angular/core';
 import { Item, WeaviateService } from '../weaviate.service';
-
-enum SearchState {
-  None,
-  Searching,
-  ResultsReturned
-}
-
-enum Media {
-  None,
-  Text,
-  Image,
-  Audio,
-  Video
-}
+import { WeaviateBigService } from '../weaviate-big.service';
 
 @Component({
   selector: 'app-search',
@@ -27,9 +14,13 @@ export class SearchComponent {
   public fileSrc: any = '';
   public queryType: string = 'text';
   public queryInProgress: boolean = false;
+  public bigSearch = false;
 
-  constructor(private weaviate:WeaviateService,private renderer: Renderer2 ) {}
-  
+  constructor(
+    private weaviate:WeaviateService,
+    private big: WeaviateBigService,
+    private renderer: Renderer2
+  ) {}
 
   onKeydown(event: any) {
     if (event.key === "Enter")
@@ -41,17 +32,20 @@ export class SearchComponent {
 
     this.queryInProgress = true;
     this.result = [];
-    this.result = await this.weaviate.textSearch(this.query);
-    this.queryInProgress = false;
-    // console.log(JSON.stringify(this.result, null, 2));
-   
-    const hrEl = document.querySelector("#whiteBar"); 
-    if (hrEl) {
-      this.renderer.setStyle(hrEl, 'width', '100%');
-      this.renderer.setStyle(hrEl, 'opacity', '1');
-    }
 
-    
+    if(this.bigSearch)
+      this.result = await this.big.textSearch(this.query);
+    else
+      this.result = await this.weaviate.textSearch(this.query);
+
+    this.queryInProgress = false;
+   
+    this.scrollToResults();
+    // const hrEl = document.querySelector("#whiteBar"); 
+    // if (hrEl) {
+    //   this.renderer.setStyle(hrEl, 'width', '100%');
+    //   this.renderer.setStyle(hrEl, 'opacity', '1');
+    // }
   }
 
   async imageSearch($event: any) {    
@@ -60,21 +54,15 @@ export class SearchComponent {
 
     this.queryInProgress = true;
     this.result = [];
-    this.result = await this.weaviate.imageSearch(file);
+
+    if(this.bigSearch)
+      this.result = await this.big.imageSearch(file);
+    else
+      this.result = await this.weaviate.imageSearch(file);
+
     this.queryInProgress = false;
-   
     
-     const lastElement = document.querySelector("#scrollDown"); 
-     
-     if (lastElement) {
-       lastElement.scrollIntoView({ behavior: "smooth", block: "end" });
-       
-     }
-     const hrEl = document.querySelector("#whiteBar"); 
-     if (hrEl) {
-       this.renderer.setStyle(hrEl, 'width', '50%');
-       this.renderer.setStyle(hrEl, 'opacity', '1');
-     }
+    this.scrollToResults();
   }
 
   async audioSearch($event: any) {
@@ -83,17 +71,15 @@ export class SearchComponent {
     
     this.queryInProgress = true;
     this.result = [];
-    this.result = await this.weaviate.audioSearch(file);
+
+    if(this.bigSearch)
+      this.result = await this.big.audioSearch(file);
+    else
+      this.result = await this.weaviate.audioSearch(file);
+
     this.queryInProgress = false;
-    const lastElement = document.querySelector("#scrollDown"); 
-    if (lastElement) {
-      lastElement.scrollIntoView({ behavior: "smooth", block: "end" });
-    }
-    const hrEl = document.querySelector("#whiteBar"); 
-    if (hrEl) {
-      this.renderer.setStyle(hrEl, 'width', '50%');
-      this.renderer.setStyle(hrEl, 'opacity', '1');
-    }
+
+    this.scrollToResults();
   }
 
   async videoSearch($event: any) {
@@ -102,17 +88,15 @@ export class SearchComponent {
 
     this.queryInProgress = true;
     this.result = [];
-    this.result = await this.weaviate.videoSearch(file);
+
+    if(this.bigSearch)
+      this.result = await this.big.videoSearch(file);
+    else
+      this.result = await this.weaviate.videoSearch(file);
+
     this.queryInProgress = false;
-    const lastElement = document.querySelector("#scrollDown"); 
-    if (lastElement) {
-      lastElement.scrollIntoView({ behavior: "smooth", block: "end" });
-    }
-    const hrEl = document.querySelector("#whiteBar"); 
-    if (hrEl) {
-      this.renderer.setStyle(hrEl, 'width', '50%');
-      this.renderer.setStyle(hrEl, 'opacity', '1');
-    }
+
+    this.scrollToResults();
   }
 
   displayMedia (file: File, media: string) {
@@ -122,5 +106,19 @@ export class SearchComponent {
       this.fileSrc = e.target.result;
     }
     reader.readAsDataURL(file);
+  }
+
+  scrollToResults() {
+    const lastElement = document.querySelector("#scrollDown");
+
+    if (lastElement) {
+      lastElement.scrollIntoView({ behavior: "smooth", block: "end" });
+    }
+
+    const hrEl = document.querySelector("#whiteBar"); 
+    if (hrEl) {
+      this.renderer.setStyle(hrEl, 'width', '75%');
+      this.renderer.setStyle(hrEl, 'opacity', '1');
+    }
   }
 }

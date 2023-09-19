@@ -1,11 +1,11 @@
 import { createBindCollection, deleteCollection } from './collection';
-import { importMediaFiles } from './import';
+import { importBigSet } from './import-big';
 
-const run = async () => {
-  const collectionName = "BindExample";
+const runBigLoad = async () => {
+  const collectionName = "BigSet";
   // await deleteCollection(collectionName);
   await createBindCollection(collectionName);
-  await importMediaFiles(collectionName);
+  await importBigSet(collectionName);
 }
 
-run();
+runBigLoad();

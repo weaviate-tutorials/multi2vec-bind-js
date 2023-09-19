@@ -8,7 +8,9 @@
     "compile-ts": "npx tsc",
     "build": "rimraf ./build && tsc",
     "start:dev": "npx nodemon",
-    "start": "npm run build && node build/index.js"
+    "start": "npm run import",
+    "import": "npm run build && node build/index.js",
+    "big-import": "npm run build && node build/index-big.js"
   },
   "keywords": [],
   "author": "",

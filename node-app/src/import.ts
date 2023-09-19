@@ -1,16 +1,11 @@
 import { ObjectsBatcher, WeaviateClient, generateUuid5 } from 'weaviate-ts-client';
 import { getWeaviateClient } from './client';
-import { FileInfo, getBase64, listFiles } from './util';
+import { getBase64, listFiles } from './util';
 
-
-
-// const sourceImages = 'source/input_images/';
-// const sourceAudio = 'source/audio/';
-// const sourceVideo = 'source/video/';
-const sourceBase = '../web-app/src/assets';
-const sourceImages = sourceBase + '/image/'
-const sourceAudio = sourceBase + '/audio/';
-const sourceVideo = sourceBase + '/video/';
+const sourceBase = '../web-app/src/';
+const imagePath = `assets/image/`;
+const audioPath = `assets/audio/`;
+const videoPath = `assets/video/`;
 
 const client: WeaviateClient = getWeaviateClient();
 
@@ -25,12 +20,13 @@ const insertImages = async (collectionName: string) => {
     let counter = 0;
     const batchSize = 5;
 
-    const files = listFiles(sourceImages);
+    const files = listFiles(sourceBase+imagePath);
     console.log(`Importing ${files.length} images.`)
 
     for (const file of files) {
         const item = {
             name: file.name,
+            url: imagePath+file.name,
             image: getBase64(file.path),
             media: 'image'
         };
@@ -58,8 +54,6 @@ const insertImages = async (collectionName: string) => {
     if (counter > 0) {
         console.log(`Flushing remaining ${counter} item(s).`)
         await batcher.do();
-        // const res = await batcher.do();
-        // console.log(res);
     }
 }
 
@@ -69,12 +63,13 @@ const insertAudio = async (collectionName: string) => {
     let counter = 0;
     const batchSize = 3;
 
-    const files = listFiles(sourceAudio);
+    const files = listFiles(sourceBase+audioPath);
     console.log(`Importing ${files.length} audio files.`)
 
     for (const file of files) {
         const item = {
             name: file.name,
+            url: audioPath+file.name,
             audio: getBase64(file.path),
             media: 'audio'
         };
@@ -109,12 +104,13 @@ const insertVideo = async (collectionName: string) => {
     let counter = 0;
     const batchSize = 1;
 
-    const files = listFiles(sourceVideo);
+    const files = listFiles(sourceBase+videoPath);
     console.log(`Importing ${files.length} video files.`)
 
     for (const file of files) {
         const item = {
             name: file.name,
+            url: videoPath+file.name,
             video: getBase64(file.path),
             media: 'video'
         };
