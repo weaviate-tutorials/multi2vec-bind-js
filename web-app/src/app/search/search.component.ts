@@ -41,11 +41,6 @@ export class SearchComponent {
     this.queryInProgress = false;
    
     this.scrollToResults();
-    // const hrEl = document.querySelector("#whiteBar"); 
-    // if (hrEl) {
-    //   this.renderer.setStyle(hrEl, 'width', '100%');
-    //   this.renderer.setStyle(hrEl, 'opacity', '1');
-    // }
   }
 
   async imageSearch($event: any) {    
